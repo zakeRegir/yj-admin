@@ -7,9 +7,9 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 // 全局样式
-import '@/styles/index.sass'
+import '@/styles/index.scss'
 
-import store from './store'
+// import store from './store'
 import router from './router'
 
 import App from './App.vue'
@@ -18,6 +18,6 @@ Vue.use(ElementUI)
 new Vue({
   el: '#app',
   router,
-  store,
+  // store,
   render: h => h(App)
 }).$mount('#app')
