@@ -7,7 +7,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 // 全局样式
-import '@/styles/index.scss'
+import '@/styles/index.less'
 
 // import store from './store'
 import router from './router'

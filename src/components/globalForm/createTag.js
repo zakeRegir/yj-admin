@@ -1,4 +1,4 @@
-export default function (h, { column, row = {}, $index }) {
+export default function(h, { column, row = {}, $index }) {
   let VNode = null
   const scopedSlots = this.scopedSlots || this.$scopedSlots
   const slots = this.slots && this.slots()
@@ -8,11 +8,14 @@ export default function (h, { column, row = {}, $index }) {
   } else if (slots && column.prop && slots[column.prop]) {
     VNode = slots[column.prop]
   }
-  return VNode || h('gbFromItem', {
-    props: {
-      row,
-      column,
-      $index
-    }
-  })
+  return (
+    VNode ||
+    h('gbFormItem', {
+      props: {
+        row,
+        column,
+        $index
+      }
+    })
+  )
 }
