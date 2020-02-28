@@ -12,9 +12,13 @@ import '@/styles/index.scss'
 // import store from './store'
 import router from './router'
 
+// 全局组件
+import globalComponents from '@/assets/js/globalComponents.js'
+
 import App from './App.vue'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.use(globalComponents)
 new Vue({
   el: '#app',
   router,

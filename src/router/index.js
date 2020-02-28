@@ -6,7 +6,11 @@ Vue.use(Router)
 export const commonRoutes = [
   {
     path: '/login',
-    component: () => import('@/pages/login/index')
+    component: () => import('@/pages/login')
+  },
+  {
+    path: '/404',
+    component: () => import('@/pages/404')
   }
 ]
 

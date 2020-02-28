@@ -29,6 +29,7 @@ module.exports = {
     'vue/name-property-casing': ['error', 'PascalCase'],
     'vue/no-v-html': 'off',
     'accessor-pairs': 2,
+    'space-before-function-paren': 0,
     'arrow-spacing': [
       2,
       {
@@ -101,6 +102,7 @@ module.exports = {
         capIsNew: false
       }
     ],
+    'no-empty': 0,
     'new-parens': 2,
     'no-array-constructor': 2,
     'no-caller': 2,
@@ -230,7 +232,6 @@ module.exports = {
       }
     ],
     'space-before-blocks': [2, 'always'],
-    'space-before-function-paren': [2, 'never'],
     'space-in-parens': [2, 'never'],
     'space-infix-ops': 2,
     'space-unary-ops': [
