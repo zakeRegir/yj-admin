@@ -24,6 +24,8 @@ module.exports = {
         }
       }
     ],
+    'no-return-assign': 0,
+    'jsx-quotes': 0,
     'vue/attribute-hyphenation': 0,
     'vue/singleline-html-element-content-newline': 'off',
     'vue/multiline-html-element-content-newline': 'off',
@@ -81,7 +83,6 @@ module.exports = {
         SwitchCase: 1
       }
     ],
-    'jsx-quotes': [2, 'prefer-single'],
     'key-spacing': [
       2,
       {
@@ -164,7 +165,7 @@ module.exports = {
     'no-proto': 2,
     'no-redeclare': 2,
     'no-regex-spaces': 2,
-    'no-return-assign': [2, 'except-parens'],
+    // 'no-return-assign': [2, 'except-parens'],
     'no-self-assign': 2,
     'no-self-compare': 2,
     'no-sequences': 2,
