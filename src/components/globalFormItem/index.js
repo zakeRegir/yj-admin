@@ -36,7 +36,7 @@ const createChildren = (h, el, column, valueKey) => {
   })
 }
 export default {
-  name: 'MItem',
+  name: 'gbFormItem',
   props: {
     row: {
       type: Object,
@@ -45,8 +45,7 @@ export default {
     column: {
       type: Object,
       required: true
-    },
-    $index: Number
+    }
   },
   data() {
     return {
@@ -69,6 +68,7 @@ export default {
     },
     componentType() {
       const { el } = this.computedColumn
+      console.log(this.computedColumn)
       if (!el) return null
       if (
         el === 'mSelect' ||
@@ -185,14 +185,15 @@ export default {
     const {
       row,
       // column,
-      $index,
       computedColumn,
       modelComputed,
       componentType,
       valueKey,
       getParams
     } = this
+    console.log(computedColumn)
     if (componentType) {
+      console.log(this.column)
       const placeholder =
         computedColumn.placeholder !== undefined
           ? computedColumn.placeholder
@@ -208,7 +209,7 @@ export default {
       }
       if (computedColumn.listeners && computedColumn.listeners.currentObj) {
         listeners.currentObj = data =>
-          computedColumn.listeners.currentObj(data, row, $index)
+          computedColumn.listeners.currentObj(data, row)
       }
       const arr = ['m-select', 'el-checkbox-group', 'el-radio-group']
       if (arr.includes(componentType)) {
@@ -242,7 +243,8 @@ export default {
                   : null
             },
             attrs: componentType === 'm-select' ? computedColumn : null,
-            on: listeners
+            on: listeners,
+            style: this.column.childStyle
           },
           children
         )
@@ -268,6 +270,8 @@ export default {
         const children = []
         const scopedSlots = {}
         Object.keys(slots).forEach(key => {
+          console.log(slots)
+          console.log(key)
           if (typeof slots[key] === 'function') {
             scopedSlots[key] = slots[key].bind(null, h)
           } else {
@@ -289,6 +293,7 @@ export default {
           },
           { placeholder }
         )
+        console.log(this.componentType, 1212)
         return h(
           componentType,
           {
@@ -304,7 +309,8 @@ export default {
             },
             attrs: attrs,
             scopedSlots,
-            on: listeners
+            on: listeners,
+            style: this.column.childStyle
           },
           children
         )
@@ -312,7 +318,7 @@ export default {
     } else {
       const VNode =
         typeof computedColumn.render === 'function'
-          ? computedColumn.render(h, { row, computedColumn, $index })
+          ? computedColumn.render(h, { row, computedColumn })
           : computedColumn.render
       return (
         VNode ||
