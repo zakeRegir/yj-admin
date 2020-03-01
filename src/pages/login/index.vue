@@ -16,6 +16,7 @@
   </div>
 </template>
 <script>
+import { reqLogin } from '@/api/login'
 export default {
   components: {},
   props: [],
@@ -96,7 +97,9 @@ export default {
   },
   watch: {},
   created() {},
-  mounted() {},
+  mounted() {
+    console.log(reqLogin, 8888)
+  },
   methods: {
     renderBtn(type, loading, span, value, clickFun) {
       return {
@@ -115,9 +118,13 @@ export default {
       }
     },
     login() {
+      reqLogin(this.LoginData)
+        .then(res => {
+          console.log(res)
+        })
       console.log(this.LoginData)
     },
-    register () {
+    register() {
       console.log(this.RegisterData)
     }
   }
