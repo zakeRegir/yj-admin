@@ -11,6 +11,10 @@ export const commonRoutes = [
   {
     path: '/404',
     component: () => import('@/pages/404')
+  },
+  {
+    path: '/',
+    component: () => import('@/pages/home')
   }
 ]
 

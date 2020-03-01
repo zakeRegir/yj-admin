@@ -80,17 +80,7 @@ const httpServer = (opts, data) => {
   } else {
     httpOptions.data = data
   }
-  const promise = new Promise((resolve, reject) => {
-    axios(httpOptions)
-      .then(req => {
-        resolve(req.data)
-      })
-      .catch(error => {
-        reject(error)
-      })
-  })
-  // 最终返回成功or失败promise
-  return promise
+  return axios(httpOptions)
 }
 // 请求拦截
 axios.interceptors.request.use(
@@ -108,18 +98,16 @@ axios.interceptors.request.use(
 // 响应拦截
 axios.interceptors.response.use(
   response => {
-    console.log(response.status, 23879283092893)
-    if (response.status !== 200) {
-      errorHandle(response.status)
-      return Promise.reject(new Error(response.message || 'Error'))
+    if (response.status === 200) {
+      return Promise.resolve(response.data)
     } else {
-      return response
+      return Promise.reject(response)
     }
   },
   error => {
     const { response } = error
     if (response) {
-      message(error.message)
+      errorHandle(response.status)
     } else {
       // 断网
     }

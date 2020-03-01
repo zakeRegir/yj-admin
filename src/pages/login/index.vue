@@ -4,11 +4,13 @@
       <h2 class="form-title">{{ showRegister ? '注册' : '登录' }}</h2>
       <gbForm
         v-if="!showRegister"
+        ref="loginForm"
         :columns="LoginColumns"
         :formData="LoginData"
       />
       <gbForm
         v-if="showRegister"
+        ref="registerForm"
         :columns="RegisterColumns"
         :formData="RegisterData"
       />
@@ -17,19 +19,21 @@
 </template>
 <script>
 import { reqLogin } from '@/api/login'
+import { messageMX } from '@/assets/js/mixins.js'
 export default {
   components: {},
+  mixins: [messageMX],
   props: [],
   data() {
     return {
-      loginWait: false,
+      loading: false,
       showRegister: false,
       RegisterData: {},
       // form的数据源
       LoginData: {
         // 没有初始值,直接在columns中定义prop, 数组除外
         username: 'yaojin',
-        password: 'yaojin',
+        password: 'yan',
         remember: false
       }
     }
@@ -39,13 +43,13 @@ export default {
       return [
         ...this.LoginColumns.slice(0, 2).concat(),
         {
-          ...this.renderBtn('text', 'loginWait', 24, '已有账号, 去登陆'),
+          ...this.renderBtn('text', '', 24, '已有账号, 去登陆'),
           style: 'margin: 0; float: right',
           listeners: {
             click: () => (this.showRegister = false)
           }
         },
-        this.renderBtn('primary', 'loginWait', 24, '注册', this.register)
+        this.renderBtn('primary', 'loading', 24, '注册', this.register)
       ]
     },
     // 每个form中,组件对应的配置(如果有数据需要读取data值,请定义在computed中)
@@ -59,6 +63,10 @@ export default {
           span: 24,
           slots: {
             prepend: <i class="el-icon-user-solid"></i>
+          },
+          rules: {
+            min: 6,
+            message: '长度最少6字符'
           }
         },
         {
@@ -71,7 +79,11 @@ export default {
           slots: {
             prepend: <i class="el-icon-lock"></i>
           },
-          style: 'margin-bottom: 10px'
+          style: 'margin-bottom: 10px',
+          rules: {
+            min: 6,
+            message: '长度最少6字符'
+          }
         },
         {
           el: 'el-checkbox-group',
@@ -85,27 +97,25 @@ export default {
           style: 'margin: 0'
         },
         {
-          ...this.renderBtn('text', 'loginWait', 12, '注册账号'),
+          ...this.renderBtn('text', '', 12, '注册账号'),
           style: 'margin: 0; float: right',
           listeners: {
             click: () => (this.showRegister = true)
           }
         },
-        this.renderBtn('primary', 'loginWait', 24, '登录', this.login)
+        this.renderBtn('primary', 'loading', 24, '登录', this.login)
       ]
     }
   },
   watch: {},
   created() {},
-  mounted() {
-    console.log(reqLogin, 8888)
-  },
+  mounted() {},
   methods: {
     renderBtn(type, loading, span, value, clickFun) {
       return {
         el: 'button',
         type,
-        loading: this[loading],
+        loading: loading ? this[loading] : false,
         span,
         style: 'text-align: center',
         childStyle: 'width: 100%',
@@ -118,10 +128,26 @@ export default {
       }
     },
     login() {
-      reqLogin(this.LoginData)
-        .then(res => {
-          console.log(res)
-        })
+      console.log(this.$refs.loginForm)
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          this.loading = true
+          this.$store.dispatch('user/login', this.LoginData).then(() => {
+            setTimeout(() => {
+              this.$router.push({
+                path: '/'
+              })
+              this.loading = false
+              this.messageTips('登录', 'success')
+            }, 500)
+          })
+        } else {
+          return
+        }
+      })
+      reqLogin(this.LoginData).then(res => {
+        console.log(res)
+      })
       console.log(this.LoginData)
     },
     register() {
