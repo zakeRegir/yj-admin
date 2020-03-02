@@ -1,5 +1,4 @@
 export default function(h, { column, row = {}}) {
-  console.log(row)
   let VNode = null
   const scopedSlots = this.scopedSlots || this.$scopedSlots
   const slots = this.slots && this.slots()

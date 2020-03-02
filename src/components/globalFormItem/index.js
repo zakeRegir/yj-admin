@@ -68,7 +68,6 @@ export default {
     },
     componentType() {
       const { el } = this.computedColumn
-      console.log(this.computedColumn)
       if (!el) return null
       if (
         el === 'mSelect' ||
@@ -191,9 +190,7 @@ export default {
       valueKey,
       getParams
     } = this
-    console.log(computedColumn)
     if (componentType) {
-      console.log(this.column)
       const placeholder =
         computedColumn.placeholder !== undefined
           ? computedColumn.placeholder
@@ -270,8 +267,6 @@ export default {
         const children = []
         const scopedSlots = {}
         Object.keys(slots).forEach(key => {
-          console.log(slots)
-          console.log(key)
           if (typeof slots[key] === 'function') {
             scopedSlots[key] = slots[key].bind(null, h)
           } else {
@@ -293,7 +288,6 @@ export default {
           },
           { placeholder }
         )
-        console.log(this.componentType, 1212)
         return h(
           componentType,
           {

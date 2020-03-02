@@ -15,6 +15,8 @@ import router from './router'
 // 全局组件
 import globalComponents from '@/utils/globalComponents.js'
 
+import './permission.js'
+
 import App from './App.vue'
 Vue.config.productionTip = false
 Vue.use(ElementUI)

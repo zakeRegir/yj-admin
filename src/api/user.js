@@ -10,3 +10,14 @@ export const reqLogin = params => {
     params
   )
 }
+
+// 用户信息
+export const reqUserInfo = params => {
+  return httpServer(
+    {
+      url: '/userinfo',
+      method: 'get'
+    },
+    params
+  )
+}

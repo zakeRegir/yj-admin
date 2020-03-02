@@ -1,5 +1,5 @@
-import { reqLogin } from '@/api/login'
-import { getToken, setToken } from '@/utils/auth'
+import { reqLogin, reqUserInfo } from '@/api/user'
+import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const state = {
   token: getToken(),
@@ -23,23 +23,54 @@ const mutations = {
     state.avatar = avatar
   },
   SET_ROLES: (state, roles) => {
+    console.log(roles)
     state.roles = roles
   }
 }
 
 const actions = {
-  // user login
+  // 登录
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
-      reqLogin({ username: username.trim(), password: password }).then(response => {
-        const { token } = response
-        commit('SET_TOKEN', token)
-        setToken(token)
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
+      reqLogin({ username: username.trim(), password: password })
+        .then(response => {
+          const { token } = response
+          commit('SET_TOKEN', token)
+          setToken(token)
+          resolve()
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  },
+
+  // 用户信息
+  getUserInfo({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      reqUserInfo({ token: state.token })
+        .then(response => {
+          const { data } = response
+          const { roles, name, avatar, introduction } = data
+          commit('SET_ROLES', roles)
+          commit('SET_NAME', name)
+          commit('SET_AVATAR', avatar)
+          commit('SET_INTRODUCTION', introduction)
+          resolve(data)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  },
+
+  resetToken({ commit }) {
+    return new Promise(resolve => {
+      commit('SET_TOKEN', '')
+      commit('SET_ROLES', [])
+      removeToken()
+      resolve()
     })
   }
 }
