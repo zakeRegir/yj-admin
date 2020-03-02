@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Layout from '@/layout'
 Vue.use(Router)
 
 // 定义无须权限的路由
@@ -14,7 +15,7 @@ export const commonRoutes = [
   },
   {
     path: '/',
-    component: () => import('@/pages/home')
+    component: Layout
   }
 ]
 

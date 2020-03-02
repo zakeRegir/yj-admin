@@ -2,12 +2,16 @@
   <div class="login-container">
     <div class="form-wrap">
       <h2 class="form-title">{{ showRegister ? '注册' : '登录' }}</h2>
+
+      <!-- 登录 -->
       <gbForm
         v-if="!showRegister"
         ref="loginForm"
         :columns="LoginColumns"
         :formData="LoginData"
       />
+
+      <!-- 注册 -->
       <gbForm
         v-if="showRegister"
         ref="registerForm"
@@ -18,7 +22,6 @@
   </div>
 </template>
 <script>
-import { reqLogin } from '@/api/login'
 import { messageMX } from '@/assets/js/mixins.js'
 export default {
   components: {},
@@ -33,7 +36,7 @@ export default {
       LoginData: {
         // 没有初始值,直接在columns中定义prop, 数组除外
         username: 'yaojin',
-        password: 'yan',
+        password: 'yaojin',
         remember: false
       }
     }
@@ -145,10 +148,6 @@ export default {
           return
         }
       })
-      reqLogin(this.LoginData).then(res => {
-        console.log(res)
-      })
-      console.log(this.LoginData)
     },
     register() {
       console.log(this.RegisterData)
