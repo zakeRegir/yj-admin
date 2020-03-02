@@ -23,14 +23,14 @@ import { mapState } from 'vuex'
 export default {
   name: 'Layout',
   components: { Sidebar },
-  ...mapState({
-    sidebar: state => state.app.sidebar,
-    device: state => state.app.device,
-    showSettings: state => state.settings.showSettings,
-    needTagsView: state => state.settings.tagsView,
-    fixedHeader: state => state.settings.fixedHeader
-  }),
   computed: {
+    ...mapState({
+      sidebar: state => state.app.sidebar,
+      device: state => state.app.device
+      // showSettings: state => state.settings.showSettings,
+      // needTagsView: state => state.settings.tagsView,
+      // fixedHeader: state => state.settings.fixedHeader
+    }),
     classObj() {
       return {
         hideSidebar: !this.sidebar.opened, // 缩小侧边

@@ -4,7 +4,7 @@ import Layout from '@/layout'
 Vue.use(Router)
 
 // 定义无须权限的路由
-export const commonRoutes = [
+export const constantRoutes = [
   {
     path: '/login',
     component: () => import('@/pages/login')
@@ -19,10 +19,17 @@ export const commonRoutes = [
   }
 ]
 
+export const asyncRoutes = [
+  {
+    path: '/home',
+    component: () => import('@/pages/home')
+  }
+]
+
 // 创建路由函数
 const createRouter = () =>
   new Router({
-    routes: commonRoutes
+    routes: constantRoutes
   })
 
 const router = createRouter()
