@@ -1,4 +1,4 @@
-import { currency } from '@/utils/index'
+import { currency } from './node_modules/@/utils/index'
 const attributes = [
   'maxlength',
   'minlenght',

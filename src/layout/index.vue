@@ -1,17 +1,19 @@
 <template>
-  <div class="app-wrapper">
-    <!-- 手机模式下的遮罩层 -->
-    <div
-      v-if="device === 'mobile' && sidebar.opened"
-      class="drawer-bg"
-      @click="handleClickOutside"
-    />
+  <div class="basic-layout">
+    <!-- 头部 -->
+    <div class="layout-header">
+      <header class="header-navbar">
+        <div class="nav-branding"></div>
+        <ul class="nav-right">
+          
+        </ul>
+      </header>
+    </div>
 
-    <!-- 侧边栏 -->
-    <sidebar class="sidebar-container" />
-
-    <!-- 导航 -->
-    <div></div>
+    <!-- 内容和侧边 -->
+    <div class="main-container">
+      <sidebar class="sidebar-container" />
+    </div>
   </div>
 </template>
 
@@ -46,16 +48,11 @@ export default {
 <style lang="less" scoped>
 @import '~@/styles/mixin.less';
 @import '~@/styles/variables.less';
-.app-wrapper {
-  .clearfix();
-  position: relative;
-  height: 100%;
-  width: 100%;
-
-  &.mobile.openSidebar {
-    position: fixed;
-    top: 0;
-  }
+.basic-layout {
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .drawer-bg {

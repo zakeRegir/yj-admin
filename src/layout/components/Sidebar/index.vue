@@ -51,7 +51,10 @@ export default {
       return !this.sidebar.opened
     }
   },
-  methods: {}
+  methods: {},
+  mounted() {
+    console.log(this.permission_routes)
+  }
 }
 </script>
 

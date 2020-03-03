@@ -7,22 +7,35 @@ Vue.use(Router)
 export const constantRoutes = [
   {
     path: '/login',
-    component: () => import('@/pages/login')
+    component: () => import('@/pages/login'),
+    hidden: true
   },
   {
     path: '/404',
-    component: () => import('@/pages/404')
+    component: () => import('@/pages/404'),
+    hidden: true
   },
   {
     path: '/',
-    component: Layout
+    component: Layout,
+    redirect: '/home',
+    children: [
+      {
+        path: 'home',
+        component: () => import('@/pages/home'),
+        name: 'home',
+        meta: { title: 'home', icon: 'el-icon-s-home' }
+      }
+    ]
   }
 ]
 
+// 需要权限的路由
 export const asyncRoutes = [
   {
-    path: '/home',
-    component: () => import('@/pages/home')
+    path: '/table',
+    name: 'table',
+    component: () => import('@/pages/table')
   }
 ]
 
