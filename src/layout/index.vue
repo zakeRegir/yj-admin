@@ -1,15 +1,7 @@
 <template>
   <div class="basic-layout">
     <!-- 头部 -->
-    <div class="layout-header">
-      <header class="header-navbar">
-        <div class="nav-branding"></div>
-        <ul class="nav-right">
-          
-        </ul>
-      </header>
-    </div>
-
+    <Navbar :sidebar="sidebar"></Navbar>
     <!-- 内容和侧边 -->
     <div class="main-container">
       <sidebar class="sidebar-container" />
@@ -19,12 +11,12 @@
 
 <script>
 // import RightPanel from '@/components/RightPanel'
-import { Sidebar } from './components'
+import { Sidebar, Navbar } from './components'
 // import ResizeMixin from './mixin/ResizeHandler'
 import { mapState } from 'vuex'
 export default {
   name: 'Layout',
-  components: { Sidebar },
+  components: { Sidebar, Navbar },
   computed: {
     ...mapState({
       sidebar: state => state.app.sidebar,
@@ -53,32 +45,8 @@ export default {
   flex: auto;
   flex-direction: column;
   min-height: 0;
-}
-
-.drawer-bg {
-  background: #000;
-  opacity: 0.3;
-  width: 100%;
-  top: 0;
-  height: 100%;
-  position: absolute;
-  z-index: 999;
-}
-
-.fixed-header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 9;
-  width: calc(100% - @sideBarWidth);
-  transition: width 0.28s;
-}
-
-.hideSidebar .fixed-header {
-  width: calc(100% - 54px);
-}
-
-.mobile .fixed-header {
-  width: 100%;
+  .main-container {
+    min-height: calc(100vh - 60px);
+  }
 }
 </style>

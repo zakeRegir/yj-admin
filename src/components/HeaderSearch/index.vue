@@ -1,5 +1,11 @@
 <template>
-  <div :class="{ show: show }" class="header-search"></div>
+  <div class="header-search">
+    <svg-icon
+      class-name="search-icon"
+      icon-class="search"
+      @click.stop="click"
+    />
+  </div>
 </template>
 
 <script>

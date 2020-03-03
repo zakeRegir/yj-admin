@@ -12,6 +12,8 @@ import '@/styles/index.less'
 import store from './store'
 import router from './router'
 
+// icon
+import './icons' // icon
 // 全局组件
 import globalComponents from '@/utils/globalComponents.js'
 
