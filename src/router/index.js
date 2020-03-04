@@ -24,7 +24,7 @@ export const constantRoutes = [
         path: 'home',
         component: () => import('@/pages/home'),
         name: 'home',
-        meta: { title: 'home', icon: 'el-icon-s-home' }
+        meta: { title: 'home', icon: 'home' }
       }
     ]
   }
@@ -35,7 +35,63 @@ export const asyncRoutes = [
   {
     path: '/table',
     name: 'table',
-    component: () => import('@/pages/table')
+    component: Layout,
+    redirect: '/table/table1',
+    meta: { title: '表格', icon: 'table' },
+    children: [
+      {
+        path: 'table1',
+        name: 'table1',
+        component: () => import('@/pages/table'),
+        meta: { title: '表格', icon: 'table' }
+      },
+      {
+        path: 'editTable',
+        name: 'editTable',
+        component: () => import('@/pages/table/EditTable'),
+        meta: { title: '编辑表格', icon: 'table' },
+        redirect: '/table/editTable/form',
+        alwaysShow: true,
+        children: [
+          {
+            path: 'form',
+            name: 'form',
+            component: () => import('@/pages/form'),
+            meta: { title: '表单', icon: 'bug' },
+            alwaysShow: true,
+            children: [
+              {
+                path: 'table2',
+                name: 'table2',
+                component: () => import('@/pages/table'),
+                meta: { title: '表格', icon: 'table' },
+                alwaysShow: true,
+                children: [
+                  {
+                    path: 'form',
+                    name: 'form',
+                    component: () => import('@/pages/form'),
+                    meta: { title: '表单', icon: 'bug' }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        path: 'table3',
+        name: 'table3',
+        component: () => import('@/pages/table'),
+        meta: { title: '表格', icon: 'table' }
+      },
+      {
+        path: 'table4',
+        name: 'table4',
+        component: () => import('@/pages/table'),
+        meta: { title: '表格', icon: 'table' }
+      }
+    ]
   }
 ]
 

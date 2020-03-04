@@ -1,25 +1,20 @@
 <template>
   <div class="nav-branding">
     <router-link key="expand" class="sidebar-logo-link" to="/">
-      <img v-if="logo" :src="logo" class="sidebar-logo" />
+      <img v-if="logo && sidebar" :src="logo" class="sidebar-logo" />
       <b class="sidebar-title">{{ title.slice(0, 2) }}</b>
       Admin
     </router-link>
-    <span class="sidebar-handle">
+    <span class="sidebar-handle" @click="toggleSideBar">
       <i class="el-icon-s-fold" />
     </span>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'SidebarLogo',
-  props: {
-    collapse: {
-      type: Boolean,
-      required: true
-    }
-  },
   data() {
     return {
       title: 'YJ',
@@ -27,8 +22,13 @@ export default {
         'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
     }
   },
-  mounted() {
-    console.log(this.collapse)
+  computed: {
+    ...mapGetters(['sidebar'])
+  },
+  methods: {
+    toggleSideBar () {
+      this.$store.dispatch('app/toggleSideBar')
+    }
   }
 }
 </script>

@@ -79,7 +79,7 @@ export default {
   },
   methods: {
     hasOneShowingChild(children = [], parent) {
-      console.log(children)
+      console.log(children, 'children')
       const showingChildren = children.filter(item => {
         if (item.hidden) {
           return false
@@ -89,8 +89,7 @@ export default {
           return true
         }
       })
-      console.log(this.onlyOneChild, 99999)
-      console.log(showingChildren, 12121212121212)
+      console.log(showingChildren, 'length')
       // When there is only one child router, the child router is displayed by default
       if (showingChildren.length === 1) {
         return true
@@ -98,9 +97,7 @@ export default {
 
       // Show parent if there are no child router to display
       if (showingChildren.length === 0) {
-        console.log(parent)
         this.onlyOneChild = { ...parent, path: '', noShowingChildren: true }
-        console.log(this.onlyOneChild)
         return true
       }
 
@@ -113,7 +110,6 @@ export default {
       if (isExternal(this.basePath)) {
         return this.basePath
       }
-      console.log('this.basePath: ', this.basePath)
       return path.resolve(this.basePath, routePath)
     }
   },

@@ -1,7 +1,7 @@
 <template>
   <div class="basic-layout">
     <!-- 头部 -->
-    <Navbar :sidebar="sidebar"></Navbar>
+    <Navbar></Navbar>
     <!-- 内容和侧边 -->
     <div class="main-container">
       <sidebar class="sidebar-container" />
@@ -24,15 +24,9 @@ export default {
       // showSettings: state => state.settings.showSettings,
       // needTagsView: state => state.settings.tagsView,
       // fixedHeader: state => state.settings.fixedHeader
-    }),
-    classObj() {
-      return {
-        hideSidebar: !this.sidebar.opened, // 缩小侧边
-        openSidebar: this.sidebar.opened, // 扩大侧边
-        withoutAnimation: this.sidebar.withoutAnimation,
-        mobile: this.device === 'mobile'
-      }
-    }
+    })
+  },
+  mounted () {
   }
 }
 </script>

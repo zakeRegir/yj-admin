@@ -3,8 +3,8 @@
     <header class="header-navbar">
       <Logo></Logo>
       <ul class="nav-right">
-        <HeaderSearch></HeaderSearch>
-        <Screenfull></Screenfull>
+        <HeaderSearch class="right-Item"></HeaderSearch>
+        <Screenfull class="right-Item"></Screenfull>
       </ul>
     </header>
   </div>
@@ -15,10 +15,7 @@ import Logo from './Logo.vue'
 import Screenfull from '@/components/Screenfull'
 import HeaderSearch from '@/components/HeaderSearch'
 export default {
-  components: { HeaderSearch, Logo, Screenfull },
-  props: {
-    sidebar: [Boolean]
-  }
+  components: { HeaderSearch, Logo, Screenfull }
 }
 </script>
 
@@ -48,6 +45,17 @@ export default {
     .nav-right {
       float: right;
       margin: 0 15px 0 0;
+      .right-Item {
+        float: left;
+        font-weight: 600;
+        height: 59px;
+        line-height: 59px;
+        position: relative;
+        display: block;
+        font-size: 18px;
+        padding-right: 12px;
+        padding-left: 12px;
+      }
     }
   }
 }

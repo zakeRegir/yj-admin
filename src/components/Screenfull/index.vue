@@ -1,9 +1,15 @@
 <template>
   <div>
-    <svg-icon
-      :icon-class="isFullscreen ? 'exit-full' : 'full'"
-      @click="click"
-    />
+    <el-tooltip
+      :content="isFullscreen ? '退出全屏' : '全屏显示'"
+      effect="dark"
+      placement="bottom"
+    >
+      <svg-icon
+        :icon-class="isFullscreen ? 'exit-full' : 'full'"
+        @click="click"
+      />
+    </el-tooltip>
   </div>
 </template>
 
