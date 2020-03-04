@@ -1,5 +1,5 @@
 <template>
-  <div>edit</div>
+  <div>编辑表格</div>
 </template>
 
 <script>

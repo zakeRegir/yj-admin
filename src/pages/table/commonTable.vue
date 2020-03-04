@@ -1,5 +1,5 @@
 <template>
-  <div>table</div>
+  <div>普通表格</div>
 </template>
 
 <script>

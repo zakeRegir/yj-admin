@@ -1,12 +1,17 @@
 <template>
-  <div class="nav-branding">
-    <router-link key="expand" class="sidebar-logo-link" to="/">
+  <div class="nav-branding" :class="{ close: !sidebar.opened }">
+    <router-link
+      v-if="sidebar.opened"
+      key="expand"
+      class="sidebar-logo-link"
+      to="/"
+    >
       <img v-if="logo && sidebar" :src="logo" class="sidebar-logo" />
       <b class="sidebar-title">{{ title.slice(0, 2) }}</b>
       Admin
     </router-link>
     <span class="sidebar-handle" @click="toggleSideBar">
-      <i class="el-icon-s-fold" />
+      <i :class="[sidebar.opened === true ? 'el-icon-s-fold ' : 'el-icon-s-unfold']" />
     </span>
   </div>
 </template>
@@ -26,7 +31,7 @@ export default {
     ...mapGetters(['sidebar'])
   },
   methods: {
-    toggleSideBar () {
+    toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
     }
   }
@@ -63,7 +68,7 @@ export default {
       margin-right: 10px;
     }
     .sidebar-title {
-      font-weight: bold
+      font-weight: bold;
     }
   }
   .sidebar-handle {
@@ -75,6 +80,9 @@ export default {
     width: 60px;
     text-align: center;
     user-select: none;
+  }
+  &.close {
+    width: 60px;
   }
 }
 </style>

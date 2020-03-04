@@ -3,20 +3,21 @@
     <!-- 头部 -->
     <Navbar></Navbar>
     <!-- 内容和侧边 -->
-    <div class="main-container">
+    <div class="main-container" :class="classObj">
       <sidebar class="sidebar-container" />
+      <AppMain></AppMain>
     </div>
   </div>
 </template>
 
 <script>
 // import RightPanel from '@/components/RightPanel'
-import { Sidebar, Navbar } from './components'
+import { Sidebar, Navbar, AppMain } from './components'
 // import ResizeMixin from './mixin/ResizeHandler'
 import { mapState } from 'vuex'
 export default {
   name: 'Layout',
-  components: { Sidebar, Navbar },
+  components: { Sidebar, Navbar, AppMain },
   computed: {
     ...mapState({
       sidebar: state => state.app.sidebar,
@@ -24,10 +25,16 @@ export default {
       // showSettings: state => state.settings.showSettings,
       // needTagsView: state => state.settings.tagsView,
       // fixedHeader: state => state.settings.fixedHeader
-    })
+    }),
+    classObj() {
+      return {
+        hideSidebar: !this.sidebar.opened, // 缩小侧边
+        openSidebar: this.sidebar.opened, // 扩大侧边
+        withoutAnimation: this.sidebar.withoutAnimation
+      }
+    }
   },
-  mounted () {
-  }
+  mounted() {}
 }
 </script>
 
@@ -40,7 +47,10 @@ export default {
   flex-direction: column;
   min-height: 0;
   .main-container {
+    display: flex;
     min-height: calc(100vh - 60px);
+    background: #f0f2f5;
+    flex: auto;
   }
 }
 </style>

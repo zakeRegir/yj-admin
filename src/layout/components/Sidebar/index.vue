@@ -1,5 +1,5 @@
 <template>
-  <div :class="classObj">
+  <div>
     <el-scrollbar class="scrollbar-wrapper">
       <el-menu
         :default-active="activeMenu"
@@ -48,13 +48,6 @@ export default {
     // 水平折叠是否开启
     isCollapse() {
       return !this.sidebar.opened
-    },
-    classObj() {
-      return {
-        hideSidebar: !this.sidebar.opened, // 缩小侧边
-        openSidebar: this.sidebar.opened, // 扩大侧边
-        withoutAnimation: this.sidebar.withoutAnimation
-      }
     }
   },
   methods: {},
