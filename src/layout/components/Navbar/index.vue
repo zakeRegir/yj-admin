@@ -2,20 +2,41 @@
   <div class="layout-header">
     <header class="header-navbar">
       <Logo></Logo>
+      <breadcrumb></breadcrumb>
       <ul class="nav-right">
         <HeaderSearch class="right-Item"></HeaderSearch>
         <Screenfull class="right-Item"></Screenfull>
+        <el-dropdown trigger="click" class="settingDrop right-Item">
+          <div
+            class="userAvatar"
+            :style="{ background: 'url(' + avatar + ')' }"
+          ></div>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>个人主页</el-dropdown-item>
+            <el-dropdown-item>设置</el-dropdown-item>
+            <el-dropdown-item>退出</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </ul>
     </header>
   </div>
 </template>
 
 <script>
+import breadcrumb from '@/components/Breadcrumb'
 import Logo from './Logo.vue'
 import Screenfull from '@/components/Screenfull'
 import HeaderSearch from '@/components/HeaderSearch'
 export default {
-  components: { HeaderSearch, Logo, Screenfull }
+  components: { HeaderSearch, Logo, Screenfull, breadcrumb },
+  computed: {
+    avatar() {
+      return this.$store.state.user.avatar
+    }
+  },
+  mounted() {
+    console.log(this.avatar)
+  }
 }
 </script>
 
@@ -49,13 +70,24 @@ export default {
         float: left;
         font-weight: 600;
         height: 59px;
-        line-height: 59px;
         position: relative;
         display: block;
+        line-height: 59px;
         font-size: 18px;
         padding-right: 12px;
         padding-left: 12px;
         cursor: pointer;
+      }
+      .settingDrop {
+        .userAvatar {
+          background-repeat: no-repeat !important;
+          background-size: cover !important;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          display: inline-block;
+          vertical-align: middle;
+        }
       }
     }
   }

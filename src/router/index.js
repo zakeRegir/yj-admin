@@ -35,7 +35,7 @@ export const asyncRoutes = [
     path: '/table',
     name: 'table',
     component: Layout,
-    redirect: '/table/editTable',
+    redirect: '/table/commonTable',
     meta: { title: '表格', icon: 'table' },
     children: [
       {
