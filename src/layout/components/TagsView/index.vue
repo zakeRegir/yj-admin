@@ -184,7 +184,7 @@ export default {
         this.left = left
       }
 
-      this.top = e.clientY
+      this.top = this.$el.offsetHeight
       this.visible = true
       this.selectedTag = tag
     },
@@ -197,6 +197,7 @@ export default {
 
 <style lang="less" scoped>
 .tags-view-container {
+  position: relative;
   height: 34px;
   width: 100%;
   background: #fff;
