@@ -31,9 +31,9 @@ export default {
   },
   methods: {
     click() {
-      if (!screenfull.enabled) {
+      if (!screenfull.isEnabled) {
         this.$message({
-          message: 'you browser can not work',
+          message: '你的浏览器不支持全屏操作',
           type: 'warning'
         })
         return false
@@ -42,14 +42,15 @@ export default {
     },
     change() {
       this.isFullscreen = screenfull.isFullscreen
+      console.log(this.isFullscreen)
     },
     init() {
-      if (screenfull.enabled) {
+      if (screenfull.isEnabled) {
         screenfull.on('change', this.change)
       }
     },
     destroy() {
-      if (screenfull.enabled) {
+      if (screenfull.isEnabled) {
         screenfull.off('change', this.change)
       }
     }
@@ -57,13 +58,3 @@ export default {
 }
 </script>
 
-<style scoped>
-.screenfull-svg {
-  display: inline-block;
-  cursor: pointer;
-  fill: #5a5e66;
-  width: 20px;
-  height: 20px;
-  vertical-align: 10px;
-}
-</style>

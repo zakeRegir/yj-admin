@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '@/layout'
 Vue.use(Router)
-
 // 定义无须权限的路由
 export const constantRoutes = [
   {
@@ -58,6 +57,8 @@ export const asyncRoutes = [
 // 创建路由函数
 const createRouter = () =>
   new Router({
+    // 到顶部, 路由跳转后
+    scrollBehavior: () => ({ y: 0 }),
     routes: constantRoutes
   })
 

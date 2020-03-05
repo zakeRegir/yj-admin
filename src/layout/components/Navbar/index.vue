@@ -55,6 +55,7 @@ export default {
         font-size: 18px;
         padding-right: 12px;
         padding-left: 12px;
+        cursor: pointer;
       }
     }
   }
