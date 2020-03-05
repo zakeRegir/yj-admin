@@ -5,7 +5,7 @@
     <!-- 内容和侧边 -->
     <div class="main-container" :class="classObj">
       <sidebar class="sidebar-container" />
-      <AppMain></AppMain>
+      <app-main></app-main>
     </div>
   </div>
 </template>

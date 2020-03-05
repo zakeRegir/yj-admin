@@ -62,6 +62,7 @@ export default {
     }
   },
   mounted() {
+    console.log('jinlai le ?')
     this.initTags()
     this.addTags()
   },

@@ -1,23 +1,29 @@
 <template>
   <section class="app-main">
+    <tags-view />
     <transition name="fade-transform" mode="out-in">
-      <keep-alive>
-        <router-view :key="key" />
+      <keep-alive :include="cachedViews">
+        <router-view :key="key" class="content" />
       </keep-alive>
     </transition>
   </section>
 </template>
 
 <script>
+import { TagsView } from './index'
 export default {
   name: 'AppMain',
+  components: { TagsView },
   computed: {
-    // cachedViews() {
-    //   return this.$store.state.tagsView.cachedViews
-    // },
+    cachedViews() {
+      return this.$store.state.tagsView.cachedViews
+    },
     key() {
       return this.$route.path
     }
+  },
+  mounted() {
+    console.log(TagsView, 9999)
   }
 }
 </script>
@@ -29,7 +35,9 @@ export default {
   width: 100%;
   position: relative;
   overflow: hidden;
-  padding: 20px;
   margin-left: 230px;
+  .content {
+    padding: 20px;
+  }
 }
 </style>
