@@ -66,7 +66,7 @@ const actions = {
 
   logout({ commit, state, dispatch }) {
     return new Promise((resolve, reject) => {
-      reqLayOut(state.token).then(() => {
+      reqLayOut({ token: state.token }).then(() => {
         commit('SET_TOKEN', '')
         commit('SET_ROLES', [])
         removeToken()

@@ -5,6 +5,16 @@ Vue.use(Router)
 // 定义无须权限的路由
 export const constantRoutes = [
   {
+    path: '/redirect',
+    component: Layout,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/pages/redirect')
+      }
+    ]
+  },
+  {
     path: '/login',
     component: () => import('@/pages/login'),
     hidden: true

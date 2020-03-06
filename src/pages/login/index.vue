@@ -29,6 +29,8 @@ export default {
   props: [],
   data() {
     return {
+      otherQuery: {},
+      redirect: undefined,
       loading: false,
       showRegister: false,
       RegisterData: {},
@@ -110,7 +112,19 @@ export default {
       ]
     }
   },
-  watch: {},
+  watch: {
+    $route: {
+      handler: function (route) {
+        console.log(route)
+        const query = route.query
+        if (query) {
+          this.redirect = query.redirect
+          this.otherQuery = this.getOtherQuery(query)
+        }
+      },
+      immediate: true
+    }
+  },
   created() {},
   mounted() {},
   methods: {
@@ -134,22 +148,36 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('user/login', this.LoginData).then(() => {
-            setTimeout(() => {
-              this.$router.push({
-                path: '/'
-              })
+          this.$store.dispatch('user/login', this.LoginData)
+            .then(() => {
+              setTimeout(() => {
+                this.$router.push({
+                  path: this.redirect || '/', query: this.otherQuery
+                })
+                this.loading = false
+                this.messageTips('登录', 'success')
+              }, 500)
+            })
+            .catch(err => {
+              console.log(err)
               this.loading = false
-              this.messageTips('登录', 'success')
-            }, 500)
-          })
+            })
         } else {
-          return
+          console.log('验证失败')
+          return false
         }
       })
     },
     register() {
       console.log(this.RegisterData)
+    },
+    getOtherQuery(query) {
+      return Object.keys(query).reduce((acc, cur) => {
+        if (cur !== 'redirect') {
+          acc[cur] = query[cur]
+        }
+        return acc
+      }, {})
     }
   }
 }

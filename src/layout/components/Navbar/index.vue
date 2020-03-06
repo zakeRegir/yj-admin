@@ -39,9 +39,6 @@ export default {
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
-  },
-  mounted() {
-    console.log(this.avatar)
   }
 }
 </script>
