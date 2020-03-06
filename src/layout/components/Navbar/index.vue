@@ -14,7 +14,7 @@
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>个人主页</el-dropdown-item>
             <el-dropdown-item>设置</el-dropdown-item>
-            <el-dropdown-item>退出</el-dropdown-item>
+            <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </ul>
@@ -32,6 +32,12 @@ export default {
   computed: {
     avatar() {
       return this.$store.state.user.avatar
+    }
+  },
+  methods: {
+    async logout() {
+      await this.$store.dispatch('user/logout')
+      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
   },
   mounted() {

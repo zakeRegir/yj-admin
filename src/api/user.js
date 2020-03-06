@@ -21,3 +21,14 @@ export const reqUserInfo = params => {
     params
   )
 }
+
+// 退出登录
+export const reqLayOut = params => {
+  return httpServer(
+    {
+      url: '/layout',
+      method: 'post'
+    },
+    params
+  )
+}
