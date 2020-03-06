@@ -31,6 +31,7 @@ export default {
 <style lang="less" scoped>
 .app-main {
   /* 50= navbar  50  */
+  transition: margin-left 0.28s;
   min-height: calc(100vh - 60px);
   width: 100%;
   position: relative;

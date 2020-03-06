@@ -1,5 +1,10 @@
 <template>
-  <el-scrollbar ref="scrollContainer" :vertical="false" class="scroll-container" @wheel.native.prevent="handleScroll">
+  <el-scrollbar
+    ref="scrollContainer"
+    :vertical="false"
+    class="scroll-container"
+    @wheel.native.prevent="handleScroll"
+  >
     <slot />
   </el-scrollbar>
 </template>
@@ -23,7 +28,7 @@ export default {
     handleScroll(e) {
       const eventDelta = e.wheelDelta || -e.deltaY * 40
       const $scrollWrapper = this.scrollWrapper
-      $scrollWrapper.scrollLeft = $scrollWrapper.scrollLeft + eventDelta / 4
+      $scrollWrapper.scrollLeft = $scrollWrapper.scrollLeft - eventDelta / 4
     },
     moveToTarget(currentTag) {
       const $container = this.$refs.scrollContainer.$el
@@ -51,12 +56,17 @@ export default {
         const nextTag = tagList[currentIndex + 1]
 
         // the tag's offsetLeft after of nextTag
-        const afterNextTagOffsetLeft = nextTag.$el.offsetLeft + nextTag.$el.offsetWidth + tagAndTagSpacing
+        const afterNextTagOffsetLeft =
+          nextTag.$el.offsetLeft + nextTag.$el.offsetWidth + tagAndTagSpacing
 
         // the tag's offsetLeft before of prevTag
-        const beforePrevTagOffsetLeft = prevTag.$el.offsetLeft - tagAndTagSpacing
+        const beforePrevTagOffsetLeft =
+          prevTag.$el.offsetLeft - tagAndTagSpacing
 
-        if (afterNextTagOffsetLeft > $scrollWrapper.scrollLeft + $containerWidth) {
+        if (
+          afterNextTagOffsetLeft >
+          $scrollWrapper.scrollLeft + $containerWidth
+        ) {
           $scrollWrapper.scrollLeft = afterNextTagOffsetLeft - $containerWidth
         } else if (beforePrevTagOffsetLeft < $scrollWrapper.scrollLeft) {
           $scrollWrapper.scrollLeft = beforePrevTagOffsetLeft
@@ -67,18 +77,19 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .scroll-container {
   white-space: nowrap;
   position: relative;
   overflow: hidden;
   width: 100%;
-  /deep/
-    .el-scrollbar__bar {
-      bottom: 0px;
-    }
-    .el-scrollbar__wrap {
-      height: 49px;
-    }
+  .el-scrollbar__bar {
+    bottom: 0px;
+  }
+  .el-scrollbar__wrap {
+    height: 57px;
+    margin-bottom: -6px;
+    margin-right: -6px;
+  }
 }
 </style>
