@@ -34,7 +34,9 @@ export default {
       }
     }
   },
-  mounted() {}
+  mounted() {
+    console.log(window.Vue)
+  }
 }
 </script>
 

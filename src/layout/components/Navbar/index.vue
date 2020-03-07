@@ -14,11 +14,15 @@
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>个人主页</el-dropdown-item>
             <el-dropdown-item>设置</el-dropdown-item>
-            <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
+            <el-dropdown-item @click.native="showLayout = true">退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </ul>
     </header>
+
+    <gbDialog v-model="showLayout" title="退出登录" :confirmFunc="logout">
+      确定要退出登录吗?
+    </gbDialog>
   </div>
 </template>
 
@@ -29,6 +33,11 @@ import Screenfull from '@/components/Screenfull'
 import HeaderSearch from '@/components/HeaderSearch'
 export default {
   components: { HeaderSearch, Logo, Screenfull, breadcrumb },
+  data () {
+    return {
+      showLayout: false
+    }
+  },
   computed: {
     avatar() {
       return this.$store.state.user.avatar

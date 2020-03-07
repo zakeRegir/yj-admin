@@ -24,6 +24,7 @@ module.exports = {
         }
       }
     ],
+    'vue/require-default-prop': 0,
     'no-return-assign': 0,
     'jsx-quotes': 0,
     'vue/attribute-hyphenation': 0,
