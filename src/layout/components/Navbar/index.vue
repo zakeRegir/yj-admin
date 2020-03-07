@@ -13,13 +13,13 @@
           ></div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>个人主页</el-dropdown-item>
-            <el-dropdown-item>设置</el-dropdown-item>
+            <el-dropdown-item @click.native="showDrawer = true">设置</el-dropdown-item>
             <el-dropdown-item @click.native="showLayout = true">退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </ul>
     </header>
-
+    <Settings :showDrawer="showDrawer" :handleClose="handleClose" />
     <gbDialog v-model="showLayout" title="退出登录" :confirmFunc="logout">
       确定要退出登录吗?
     </gbDialog>
@@ -27,15 +27,17 @@
 </template>
 
 <script>
+import Settings from '../Settings/index.vue'
 import breadcrumb from '@/components/Breadcrumb'
 import Logo from './Logo.vue'
 import Screenfull from '@/components/Screenfull'
 import HeaderSearch from '@/components/HeaderSearch'
 export default {
-  components: { HeaderSearch, Logo, Screenfull, breadcrumb },
+  components: { HeaderSearch, Logo, Screenfull, breadcrumb, Settings },
   data () {
     return {
-      showLayout: false
+      showLayout: false,
+      showDrawer: false
     }
   },
   computed: {
@@ -47,6 +49,9 @@ export default {
     async logout() {
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    },
+    handleClose () {
+      this.showDrawer = false
     }
   }
 }
@@ -54,11 +59,11 @@ export default {
 
 <style lang="less" scoped>
 .layout-header {
-  height: auto;
+  position: relative;
+  height: 60px;
   line-height: normal;
   padding: 0;
   background: #fff;
-  overflow: hidden;
   .header-navbar {
     z-index: 1030;
     margin-bottom: 0;

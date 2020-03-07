@@ -1,29 +1,30 @@
 <template>
   <section class="app-main">
-    <tags-view />
-    <transition name="fade-transform" mode="out-in">
-      <keep-alive :include="cachedViews">
-        <router-view :key="key" class="content" />
-      </keep-alive>
-    </transition>
+    <tags-view v-if="needTagsView" />
+    <el-scrollbar class="content-scrollbar">
+      <transition name="fade-transform" mode="out-in">
+        <keep-alive :include="cachedViews">
+          <router-view :key="key" class="content" />
+        </keep-alive>
+      </transition>
+    </el-scrollbar>
   </section>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { TagsView } from './index'
 export default {
   name: 'AppMain',
   components: { TagsView },
   computed: {
-    cachedViews() {
-      return this.$store.state.tagsView.cachedViews
-    },
     key() {
       return this.$route.path
-    }
-  },
-  mounted() {
-    console.log(TagsView, 9999)
+    },
+    ...mapState({
+      cachedViews: state => state.tagsView.cachedViews,
+      needTagsView: state => state.settings.tagsView
+    })
   }
 }
 </script>
@@ -38,7 +39,13 @@ export default {
   overflow: hidden;
   margin-left: 230px;
   .content {
-    padding: 20px;
+    margin: 15px;
+  }
+  .content-scrollbar {
+    height: 100%;
+    position: relative;
+    // padding-bottom: 20px;
+    // margin-bottom: 20px;
   }
 }
 </style>

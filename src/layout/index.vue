@@ -47,7 +47,8 @@ export default {
   display: flex;
   flex: auto;
   flex-direction: column;
-  min-height: 0;
+  width: 100%;
+  height: 100%;
   .main-container {
     display: flex;
     min-height: calc(100vh - 60px);

@@ -24,6 +24,7 @@ module.exports = {
         }
       }
     ],
+    'no-prototype-builtins': 0,
     'vue/require-default-prop': 0,
     'no-return-assign': 0,
     'jsx-quotes': 0,

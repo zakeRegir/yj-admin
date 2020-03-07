@@ -223,15 +223,6 @@ export default {
     -webkit-box-shadow: inset 0 0 3px 2px hsla(0, 0%, 39.2%, 0.1);
     box-shadow: inset 0 0 3px 2px hsla(0, 0%, 39.2%, 0.1);
     height: 100%;
-    ::-webkit-scrollbar {
-      height: 6px;
-      width: 6px;
-    }
-    ::-webkit-scrollbar-thumb {
-      background-color: rgba(144, 147, 153, 0.3);
-      -webkit-transition: background-color 0.3s;
-      transition: background-color 0.3s;
-    }
     .tags-view-item {
       display: inline-block;
       position: relative;
