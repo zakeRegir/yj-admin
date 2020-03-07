@@ -38,6 +38,8 @@ export default {
   position: relative;
   overflow: hidden;
   margin-left: 230px;
+  display: flex;
+  flex-direction: column;
   .content {
     margin: 15px;
   }
